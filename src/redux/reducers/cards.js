@@ -1,7 +1,15 @@
-import { SET_DECK, FLIP_CARD, RESTART } from "../constants/constants";
+import {
+  SET_DECK,
+  FLIP_CARD,
+  KEEP_CLOSE,
+  RESTART,
+} from "../_constants/constants";
 
 const initialState = {
   deck: null,
+  try: 1,
+  guess1: null,
+  guess2: null,
 };
 
 export default function cards(state = initialState, action) {
@@ -11,68 +19,61 @@ export default function cards(state = initialState, action) {
         ...state,
         deck: action.payload,
       };
-    case FLIP_CARD: {
-      return {
-        ...state,
-        deck: state.deck.map((card, index) => {
-          if (index === action.payload) {
-            return { ...card, flipped: !card.flipped };
-          }
-          return card;
-        }),
-      };
-    }
+    case FLIP_CARD:
+      let newState = { try: state.try + 1 };
 
-    // case FLIP_CARD:
-    //   let newState = { round: state.round + 1 };
+      if (state.try % 2 === 1) {
+        let cardClicked = state.deck.find((card, index) => {
+          return index === action.payload;
+        });
 
-    //   if (state.round % 2 === 1) {
-    //     let cardClicked = state.cards.find((card) => {
-    //       return card.id === action.id;
-    //     });
+        return {
+          ...newState,
+          guess1: cardClicked.id,
+          guess2: null,
+          deck: state.deck.map((card, index) => {
+            return index === action.payload
+              ? { ...card, flipped: true }
+              : { ...card, flipped: false };
+          }),
+        };
+      } else {
+        let cardClicked = state.deck.find((card, index) => {
+          return index === action.payload;
+        });
 
-    //     Object.assign(newState, {
-    //       guess1: cardClicked.id,
-    //       guess2: null,
-    //       cards: state.cards.map((card) => {
-    //         return card.id === action.id
-    //           ? Object.assign({}, card, { flipped: true })
-    //           : Object.assign({}, card, { flipped: false });
-    //       }),
-    //     });
-    //   } else {
-    //     let cardClicked = state.cards.find((card) => {
-    //       return card.id === action.id;
-    //     });
-
-    //     if (cardClicked.rel === state.guess1) {
-    //       Object.assign(newState, {
-    //         guess1: state.guess1,
-    //         guess2: cardClicked.rel,
-    //         cards: state.cards.map((card) => {
-    //           return card.id === action.id || card.id === state.guess1
-    //             ? Object.assign({}, card, { flipped: true, discovered: true })
-    //             : card;
-    //         }),
-    //       });
-    //     } else {
-    //       Object.assign(newState, {
-    //         guess1: state.guess1,
-    //         guess2: cardClicked.rel,
-    //         cards: state.cards.map((card) => {
-    //           return card.id === action.id
-    //             ? Object.assign({}, card, { flipped: true })
-    //             : card;
-    //         }),
-    //       });
-    //     }
-    //   }
-
-    //   return newState;
+        if (cardClicked.id === state.guess1) {
+          return {
+            ...newState,
+            guess1: state.guess1,
+            guess2: cardClicked.id,
+            deck: state.deck.map((card, index) => {
+              return index === action.payload || card.id === state.guess1
+                ? { ...card, flipped: true, discovered: true }
+                : card;
+            }),
+          };
+        } else {
+          return {
+            ...newState,
+            guess1: state.guess1,
+            guess2: cardClicked.id,
+            deck: state.deck.map((card, index) => {
+              return index === action.payload
+                ? { ...card, flipped: true }
+                : card;
+            }),
+          };
+        }
+      }
+    // case KEEP_CLOSE:
 
     case RESTART:
       return {
         deck: null,
+        try: 1,
+        guess1: null,
+        guess2: null,
       };
 
     default:

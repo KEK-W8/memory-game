@@ -1,12 +1,15 @@
 import React from "react";
 
-function Card({ index, isFlipped, onClickCard, content }) {
+function Card({ index, isFlipped, isDiscovered, onClickCard, content }) {
   return (
     <div
-      className={`content-main-card ${isFlipped ? "flipped" : ""} `}
-      onClick={() => onClickCard(index)}
+      className={`content-main-card 
+      ${isFlipped || isDiscovered ? "flipped" : ""} ${
+        isDiscovered ? "discovered" : ""
+      }`}
+      onClick={isFlipped || isDiscovered ? null : () => onClickCard(index)}
     >
-      {isFlipped ? content : ""}
+      {isFlipped || isDiscovered ? content : ""}
     </div>
   );
 }
