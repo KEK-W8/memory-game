@@ -1,4 +1,4 @@
 export const SET_DECK = "SET_DECK";
-export const KEEP_CLOSE = "KEEP_CLOSE";
 export const FLIP_CARD = "FLIP_CARD";
-export const RESTART = "RESTART";
+export const MATCH = "MATCH";
+export const NOT_MATCH = "NOT_MATCH";

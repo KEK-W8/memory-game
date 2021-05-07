@@ -1,14 +1,21 @@
 import React from "react";
 
+import { useSelector } from "react-redux";
+
 function Header() {
+  const round = Math.ceil(useSelector(({ cards }) => cards.try) / 2);
+
   return (
-    <div className="content-header">
-      <div className="content-header-rounds">Round: 1</div>
-      <div className="content-header-restart">
-        <strong>
-          Победа! <button className="button">Restart</button>
-        </strong>
-      </div>
+    <div className="header">
+      <strong>Round:{round}</strong>
+      <button
+        className="button"
+        onClick={() => {
+          window.location.reload();
+        }}
+      >
+        <strong>Restart</strong>
+      </button>
     </div>
   );
 }

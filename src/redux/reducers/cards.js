@@ -1,9 +1,5 @@
-import {
-  SET_DECK,
-  FLIP_CARD,
-  KEEP_CLOSE,
-  RESTART,
-} from "../_constants/constants";
+import { SET_DECK, FLIP_CARD, MATCH, NOT_MATCH } from "../_constants/constants";
+import { shuffledDeck } from "../deck.js";
 
 const initialState = {
   deck: null,
@@ -17,7 +13,7 @@ export default function cards(state = initialState, action) {
     case SET_DECK:
       return {
         ...state,
-        deck: action.payload,
+        deck: shuffledDeck,
       };
     case FLIP_CARD:
       let newState = { try: state.try + 1 };
@@ -42,40 +38,40 @@ export default function cards(state = initialState, action) {
           return index === action.payload;
         });
 
-        if (cardClicked.id === state.guess1) {
-          return {
-            ...newState,
-            guess1: state.guess1,
-            guess2: cardClicked.id,
-            deck: state.deck.map((card, index) => {
-              return index === action.payload || card.id === state.guess1
-                ? { ...card, flipped: true, discovered: true }
-                : card;
-            }),
-          };
-        } else {
-          return {
-            ...newState,
-            guess1: state.guess1,
-            guess2: cardClicked.id,
-            deck: state.deck.map((card, index) => {
-              return index === action.payload
-                ? { ...card, flipped: true }
-                : card;
-            }),
-          };
-        }
+        return {
+          ...newState,
+          guess1: state.guess1,
+          guess2: cardClicked.id,
+          deck: state.deck.map((card, index) => {
+            return index === action.payload ? { ...card, flipped: true } : card;
+          }),
+        };
       }
-    // case KEEP_CLOSE:
+    case MATCH: {
+      let newState = { ...state };
 
-    case RESTART:
+      if (state.guess2 && state.guess1 === state.guess2) {
+        return {
+          ...newState,
+          deck: state.deck.map((card) => {
+            return card.id === state.guess1 && state.guess2
+              ? { ...card, discovered: true }
+              : card;
+          }),
+        };
+      }
+      return { ...state };
+    }
+    case NOT_MATCH: {
       return {
-        deck: null,
-        try: 1,
+        ...state,
         guess1: null,
         guess2: null,
+        deck: state.deck.map((card) => {
+          return card.discovered ? card : { ...card, flipped: false };
+        }),
       };
-
+    }
     default:
       return state;
   }

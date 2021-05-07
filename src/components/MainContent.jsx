@@ -3,20 +3,7 @@ import { useDispatch, useSelector } from "react-redux";
 
 import Card from "./Card";
 
-import { setDeck, flipCard, restart, keepClose } from "../redux/actions/cards";
-
-const figures = [
-  { id: 1, name: "worm", symbol: "🪱", flipped: false, discovered: false },
-  { id: 2, name: "orangutan", symbol: "🦧", flipped: false, discovered: false },
-  { id: 3, name: "kangaroo", symbol: "🦘", flipped: false, discovered: false },
-  { id: 4, name: "bison", symbol: "🦬", flipped: false, discovered: false },
-  { id: 5, name: "flamingo", symbol: "🦩", flipped: false, discovered: false },
-  { id: 6, name: "otter", symbol: "🦦", flipped: false, discovered: false },
-  { id: 7, name: "eagle", symbol: "🦅", flipped: false, discovered: false },
-  { id: 8, name: "scorpion", symbol: "🦂", flipped: false, discovered: false },
-];
-
-const shuffledDeck = figures.concat(figures).sort(() => Math.random() - 0.5);
+import { setDeck, flipCard, match, notMatch } from "../redux/actions/cards";
 
 function MainContent() {
   const dispatch = useDispatch();
@@ -24,12 +11,16 @@ function MainContent() {
   const round = Math.ceil(useSelector(({ cards }) => cards.try) / 2);
 
   useEffect(() => {
-    dispatch(setDeck(shuffledDeck));
-  }, [dispatch]);
+    dispatch(setDeck());
+  }, []);
 
-  // useEffect(() => {
-  //   dispatch(keepClose());
-  // }, [match]);
+  useEffect(() => {
+    let timer1 = setTimeout(() => dispatch(match()), 250);
+    let timer2 = setTimeout(() => dispatch(notMatch()), 550);
+    return () => {
+      clearTimeout(timer1, timer2);
+    };
+  }, [round]);
 
   function handleClickCard(index) {
     dispatch(flipCard(index));
@@ -37,7 +28,6 @@ function MainContent() {
 
   return (
     <div className="content-main">
-      {round}
       {deck &&
         deck.map((cardObj, index) => {
           return (
