@@ -1,0 +1,28 @@
+@import "../assets/variables";
+
+.content-main-card {
+  width: rem(120px);
+  height: rem(120px);
+  background: $special;
+  border-radius: rem(8px);
+  font-size: rem(75px);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  transform-style: preserve-3d;
+  transition: 0.3s ease all;
+  &:hover {
+    cursor: pointer;
+    background-color: darken($white, 9%);
+  }
+  &.flipped {
+    transform: rotateY(180deg);
+    cursor: default;
+    background: $white;
+  }
+  &.discovered {
+    opacity: 0;
+    background-color: $done;
+    transition: 1s ease-out opacity;
+  }
+}

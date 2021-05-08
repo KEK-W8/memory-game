@@ -1,4 +1,4 @@
-import { SET_DECK, FLIP_CARD, MATCH, NOT_MATCH } from "../_constants/constants";
+import { SET_DECK, FLIP_CARD, MATCH_CHECK } from "../_constants/constants";
 
 export function setDeck(deck) {
   return {
@@ -14,14 +14,8 @@ export function flipCard(index) {
   };
 }
 
-export function match() {
+export function matchCheck() {
   return {
-    type: MATCH,
-  };
-}
-
-export function notMatch() {
-  return {
-    type: NOT_MATCH,
+    type: MATCH_CHECK,
   };
 }

@@ -1,0 +1,23 @@
+@import "../assets/variables";
+
+.header {
+  width: 100%;
+  position: absolute;
+  top: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: rem(15px);
+  z-index: 1;
+  .button {
+    background-color: $white;
+    border: none;
+    border-radius: rem(4px);
+    padding: rem(15px) rem(32px);
+    margin-left: rem(20px);
+    &:hover {
+      cursor: pointer;
+      background-color: darken($white, 9%);
+    }
+  }
+}

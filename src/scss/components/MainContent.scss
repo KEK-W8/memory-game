@@ -1,0 +1,25 @@
+@import "../assets/variables";
+
+.content-main {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  grid-template-rows: repeat(4, 1fr);
+  grid-gap: rem(10px);
+}
+.end-game {
+  grid-column: 2/4;
+  grid-row: 2/3;
+  animation: color-change 1s infinite;
+
+  @keyframes color-change {
+    0% {
+      color: red;
+    }
+    50% {
+      color: blue;
+    }
+    100% {
+      color: red;
+    }
+  }
+}

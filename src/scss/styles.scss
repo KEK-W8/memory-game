@@ -1,28 +1,9 @@
 @import "assets/variables";
 @import "assets/normalize";
 
-.header {
-  width: 100%;
-  position: absolute;
-  top: 0;
-  display: flex;
-  justify-content: center;
-  align-items: baseline;
-  margin-top: rem(15px);
-  .button {
-    background-color: $white;
-    border: none;
-    border-radius: rem(4px);
-    padding: rem(15px) rem(32px);
-    margin-left: rem(20px);
-    &:hover {
-      cursor: pointer;
-      background-color: darken($white, 9%);
-    }
-  }
-}
+@import "components/all";
 
-.content {
+.app-wrapper {
   width: 100%;
   height: 100vh;
   min-width: rem(590px);
@@ -31,36 +12,4 @@
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  &-main {
-    display: grid;
-    grid-template-columns: repeat(4, 1fr);
-    grid-template-rows: repeat(4, 1fr);
-    grid-gap: rem(10px);
-    &-card {
-      width: rem(120px);
-      height: rem(120px);
-      background: $special;
-      border-radius: rem(8px);
-      font-size: rem(75px);
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      transform-style: preserve-3d;
-      transition: 0.3s ease all;
-      &:hover {
-        cursor: pointer;
-        background-color: darken($white, 9%);
-      }
-      &.flipped {
-        transform: rotateY(180deg);
-        cursor: default;
-        background: $white;
-      }
-      &.discovered {
-        opacity: 0;
-        background-color: $done;
-        transition: 1.8s ease opacity;
-      }
-    }
-  }
 }

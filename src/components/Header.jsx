@@ -7,7 +7,7 @@ function Header() {
 
   return (
     <div className="header">
-      <strong>Round:{round}</strong>
+      <h3>Round: {round}</h3>
       <button
         className="button"
         onClick={() => {

@@ -3,24 +3,26 @@ import { useDispatch, useSelector } from "react-redux";
 
 import Card from "./Card";
 
-import { setDeck, flipCard, match, notMatch } from "../redux/actions/cards";
+import { setDeck, flipCard, matchCheck } from "../redux/actions/cards";
+import { shuffledDeck } from "../data/deck";
 
 function MainContent() {
   const dispatch = useDispatch();
   const deck = useSelector(({ cards }) => cards.deck);
+  const isLoaded = useSelector(({ cards }) => cards.isLoaded);
+  const gameOver = useSelector(({ cards }) => cards.gameOver);
   const round = Math.ceil(useSelector(({ cards }) => cards.try) / 2);
 
   useEffect(() => {
-    dispatch(setDeck());
-  }, []);
+    setTimeout(() => dispatch(setDeck(shuffledDeck)), 100);
+  }, [dispatch]);
 
   useEffect(() => {
-    let timer1 = setTimeout(() => dispatch(match()), 250);
-    let timer2 = setTimeout(() => dispatch(notMatch()), 550);
+    let timer1 = setTimeout(() => dispatch(matchCheck()), 450);
     return () => {
-      clearTimeout(timer1, timer2);
+      clearTimeout(timer1);
     };
-  }, [round]);
+  }, [dispatch, round]);
 
   function handleClickCard(index) {
     dispatch(flipCard(index));
@@ -28,19 +30,24 @@ function MainContent() {
 
   return (
     <div className="content-main">
-      {deck &&
+      {gameOver ? (
+        <h1 className="end-game">GAME OVER</h1>
+      ) : (
+        deck &&
         deck.map((cardObj, index) => {
           return (
             <Card
               key={`${index}_${cardObj.name}`}
+              index={index}
               content={cardObj.symbol}
               isFlipped={cardObj.flipped}
               isDiscovered={cardObj.discovered}
-              index={index}
+              isLoaded={isLoaded}
               onClickCard={handleClickCard}
             />
           );
-        })}
+        })
+      )}
     </div>
   );
 }

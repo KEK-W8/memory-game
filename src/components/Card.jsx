@@ -1,15 +1,23 @@
 import React from "react";
 
-function Card({ index, isFlipped, isDiscovered, onClickCard, content }) {
+function Card({
+  index,
+  content,
+  isFlipped,
+  isDiscovered,
+  onClickCard,
+  isLoaded,
+}) {
+  const faceUp = isFlipped || isDiscovered;
+
   return (
     <div
       className={`content-main-card 
-      ${isFlipped || isDiscovered ? "flipped" : ""} ${
-        isDiscovered ? "discovered" : ""
-      }`}
-      onClick={isFlipped || isDiscovered ? null : () => onClickCard(index)}
+      ${faceUp ? "flipped" : ""} 
+      ${isDiscovered ? "discovered" : ""}`}
+      onClick={!isLoaded || faceUp ? null : () => onClickCard(index)}
     >
-      {isFlipped || isDiscovered ? content : ""}
+      {faceUp ? content : ""}
     </div>
   );
 }
