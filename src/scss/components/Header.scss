@@ -13,6 +13,7 @@
     border-radius: rem(4px);
     padding: rem(15px) rem(32px);
     margin-left: rem(20px);
+    user-select: none;
     &:hover {
       cursor: pointer;
       background-color: darken($white, 9%);

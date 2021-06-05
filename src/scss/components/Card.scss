@@ -11,6 +11,7 @@
   align-items: center;
   transform-style: preserve-3d;
   transition: 0.3s ease all;
+  user-select: none;
   &:hover {
     cursor: pointer;
     background-color: darken($white, 9%);
