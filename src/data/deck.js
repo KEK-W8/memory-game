@@ -1,4 +1,4 @@
-const figures = [
+const symbols = [
   { id: 1, name: "worm", symbol: "🪱", flipped: false, discovered: false },
   { id: 2, name: "orangutan", symbol: "🦧", flipped: false, discovered: false },
   { id: 3, name: "kangaroo", symbol: "🦘", flipped: false, discovered: false },
@@ -9,6 +9,6 @@ const figures = [
   { id: 8, name: "scorpion", symbol: "🦂", flipped: false, discovered: false },
 ];
 
-export const shuffledDeck = figures
-  .concat(figures)
+export const shuffledDeck = symbols
+  .concat(symbols)
   .sort(() => Math.random() - 0.5);

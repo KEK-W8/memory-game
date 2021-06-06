@@ -13,11 +13,11 @@ function Card({
   return (
     <div
       className={`content-main-card 
-      ${faceUp ? "flipped" : ""} 
-      ${isDiscovered ? "discovered" : ""}`}
+      ${faceUp && "flipped"} 
+      ${isDiscovered && "discovered"}`}
       onClick={!isLoaded || faceUp ? null : () => onClickCard(index)}
     >
-      {faceUp ? content : ""}
+      {faceUp && content}
     </div>
   );
 }

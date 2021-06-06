@@ -34,14 +34,14 @@ function MainContent() {
         <h1 className="end-game">GAME OVER</h1>
       ) : (
         deck &&
-        deck.map((cardObj, index) => {
+        deck.map((item, index) => {
           return (
             <Card
-              key={`${index}_${cardObj.name}`}
+              key={`${index}_${item.name}`}
               index={index}
-              content={cardObj.symbol}
-              isFlipped={cardObj.flipped}
-              isDiscovered={cardObj.discovered}
+              content={item.symbol}
+              isFlipped={item.flipped}
+              isDiscovered={item.discovered}
               isLoaded={isLoaded}
               onClickCard={handleClickCard}
             />
