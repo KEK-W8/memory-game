@@ -1,11 +1,11 @@
 @import "../assets/variables";
 
 .content-main-card {
-  width: rem(120px);
-  height: rem(120px);
+  width: 120px;
+  height: 120px;
   background-color: $special;
-  border-radius: rem(8px);
-  font-size: rem(75px);
+  border-radius: 8px;
+  font-size: 75px;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -23,7 +23,7 @@
     transition: 1s ease-out opacity;
   }
 }
-@media only screen and (min-width: 769px) {
+@media only screen and (min-device-width: 769px) {
   .content-main-card:hover {
     cursor: pointer;
     background-color: darken($white, 9%);

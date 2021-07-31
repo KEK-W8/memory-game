@@ -5,14 +5,14 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  margin-bottom: rem(30px);
+  margin-bottom: 30px;
   z-index: 1;
   .button {
     background-color: $white;
     border: none;
-    border-radius: rem(4px);
-    padding: rem(15px) rem(32px);
-    margin-left: rem(20px);
+    border-radius: 4px;
+    padding: 15px 32px;
+    margin-left: 20px;
     user-select: none;
     &:hover {
       cursor: pointer;

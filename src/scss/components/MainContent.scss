@@ -4,7 +4,7 @@
   display: grid;
   grid-template-columns: repeat(4, 1fr);
   grid-template-rows: repeat(4, 1fr);
-  grid-gap: rem(10px);
+  grid-gap: 10px;
 }
 .end-game {
   grid-column: 2/4;
