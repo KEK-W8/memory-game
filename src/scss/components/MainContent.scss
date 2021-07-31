@@ -5,6 +5,7 @@
   grid-template-columns: repeat(4, 1fr);
   grid-template-rows: repeat(4, 1fr);
   grid-gap: 10px;
+  margin: 0 20px;
 }
 .end-game {
   grid-column: 2/4;
@@ -21,5 +22,11 @@
     100% {
       color: red;
     }
+  }
+}
+@media only screen and (max-device-width: 769px) {
+  .content-main {
+    grid-template-columns: repeat(3, 1fr);
+    grid-template-rows: repeat(6, 1fr);
   }
 }

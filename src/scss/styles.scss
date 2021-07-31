@@ -4,13 +4,11 @@
 @import "components/all";
 
 .app-wrapper {
-  width: 100%;
+  width: 100vw;
   height: 100vh;
-  min-width: 590px;
-  min-height: 630px;
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: center;
+  justify-content: flex-start;
   padding: 15px;
 }
