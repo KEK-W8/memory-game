@@ -16,6 +16,7 @@ function Card({
       ${faceUp && "flipped"} 
       ${isDiscovered && "discovered"}`}
       onClick={!isLoaded || faceUp ? null : () => onClickCard(index)}
+      onTouchMove={!isLoaded || faceUp ? null : (e) => console.log(e)}
     >
       {faceUp && content}
     </div>
