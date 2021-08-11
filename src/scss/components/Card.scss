@@ -16,11 +16,13 @@
     transform: rotateY(180deg);
     cursor: default;
     background-color: $white;
+    pointer-events: none;
   }
   &.discovered {
     opacity: 0;
     background-color: $done;
     transition: 1s ease-out opacity;
+    pointer-events: none;
   }
 }
 @media only screen and (min-width: 769px) {
